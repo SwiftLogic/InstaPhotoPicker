@@ -10,7 +10,6 @@
 		E9386856286BB256005287FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9386855286BB256005287FE /* AppDelegate.swift */; };
 		E9386858286BB256005287FE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9386857286BB256005287FE /* SceneDelegate.swift */; };
 		E938685A286BB256005287FE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9386859286BB256005287FE /* ViewController.swift */; };
-		E938685D286BB256005287FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E938685B286BB256005287FE /* Main.storyboard */; };
 		E938685F286BB258005287FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E938685E286BB258005287FE /* Assets.xcassets */; };
 		E9386862286BB258005287FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9386860286BB258005287FE /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -20,7 +19,6 @@
 		E9386855286BB256005287FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E9386857286BB256005287FE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E9386859286BB256005287FE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		E938685C286BB256005287FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E938685E286BB258005287FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E9386861286BB258005287FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E9386863286BB258005287FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -59,7 +57,6 @@
 				E9386855286BB256005287FE /* AppDelegate.swift */,
 				E9386857286BB256005287FE /* SceneDelegate.swift */,
 				E9386859286BB256005287FE /* ViewController.swift */,
-				E938685B286BB256005287FE /* Main.storyboard */,
 				E938685E286BB258005287FE /* Assets.xcassets */,
 				E9386860286BB258005287FE /* LaunchScreen.storyboard */,
 				E9386863286BB258005287FE /* Info.plist */,
@@ -127,7 +124,6 @@
 			files = (
 				E9386862286BB258005287FE /* LaunchScreen.storyboard in Resources */,
 				E938685F286BB258005287FE /* Assets.xcassets in Resources */,
-				E938685D286BB256005287FE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,14 +143,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		E938685B286BB256005287FE /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E938685C286BB256005287FE /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		E9386860286BB258005287FE /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -292,7 +280,6 @@
 				INFOPLIST_FILE = InstaPhotoPicker/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -304,7 +291,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -320,7 +307,6 @@
 				INFOPLIST_FILE = InstaPhotoPicker/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -332,7 +318,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
