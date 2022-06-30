@@ -12,6 +12,10 @@
 		E938685A286BB256005287FE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9386859286BB256005287FE /* ViewController.swift */; };
 		E938685F286BB258005287FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E938685E286BB258005287FE /* Assets.xcassets */; };
 		E9386862286BB258005287FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9386860286BB258005287FE /* LaunchScreen.storyboard */; };
+		E938686A286BB696005287FE /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9386869286BB696005287FE /* Utils.swift */; };
+		E938686C286BBA09005287FE /* MediaPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E938686B286BBA09005287FE /* MediaPickerView.swift */; };
+		E938686E286BD871005287FE /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E938686D286BD871005287FE /* PhotoCell.swift */; };
+		E960C0B5286CF14B00F5CA6A /* VCPreviewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960C0B4286CF14B00F5CA6A /* VCPreviewer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +26,10 @@
 		E938685E286BB258005287FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E9386861286BB258005287FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E9386863286BB258005287FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E9386869286BB696005287FE /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		E938686B286BBA09005287FE /* MediaPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPickerView.swift; sourceTree = "<group>"; };
+		E938686D286BD871005287FE /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
+		E960C0B4286CF14B00F5CA6A /* VCPreviewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCPreviewer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +68,10 @@
 				E938685E286BB258005287FE /* Assets.xcassets */,
 				E9386860286BB258005287FE /* LaunchScreen.storyboard */,
 				E9386863286BB258005287FE /* Info.plist */,
+				E9386869286BB696005287FE /* Utils.swift */,
+				E938686B286BBA09005287FE /* MediaPickerView.swift */,
+				E938686D286BD871005287FE /* PhotoCell.swift */,
+				E960C0B4286CF14B00F5CA6A /* VCPreviewer.swift */,
 			);
 			path = InstaPhotoPicker;
 			sourceTree = "<group>";
@@ -134,9 +146,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E960C0B5286CF14B00F5CA6A /* VCPreviewer.swift in Sources */,
 				E938685A286BB256005287FE /* ViewController.swift in Sources */,
 				E9386856286BB256005287FE /* AppDelegate.swift in Sources */,
+				E938686C286BBA09005287FE /* MediaPickerView.swift in Sources */,
 				E9386858286BB256005287FE /* SceneDelegate.swift in Sources */,
+				E938686E286BD871005287FE /* PhotoCell.swift in Sources */,
+				E938686A286BB696005287FE /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
