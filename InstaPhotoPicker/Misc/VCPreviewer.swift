@@ -2,8 +2,7 @@
 //  VCPreviewer.swift
 //  SamiSays11
 //
-//  Created by Osaretin Uyigue on 5/05/19.
-//  Copyright © 2019 Osaretin Uyigue. All rights reserved.
+//  Created by Osaretin Uyigue on 6/28/22.
 //
 
 import UIKit
