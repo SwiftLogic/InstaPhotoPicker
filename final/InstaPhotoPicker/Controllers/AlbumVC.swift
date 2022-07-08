@@ -19,14 +19,21 @@ class AlbumVC: CardModalViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
+    
+    deinit {
+        PHPhotoLibrary.shared().unregisterChangeObserver(self)
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     
     //MARK: - view's LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpTableView()
+        PHPhotoLibrary.shared().register(self)
         view.backgroundColor = .clear
     }
     
@@ -44,7 +51,7 @@ class AlbumVC: CardModalViewController {
     
     fileprivate var albumSections: [AlbumCollectionSectionType] = [.smartAlbums, .userCreatedAlbums]
     fileprivate var smartAlbums: [PHAssetCollection]
-    fileprivate let userCreatedAlbums: PHFetchResult<PHAssetCollection>
+    fileprivate var userCreatedAlbums: PHFetchResult<PHAssetCollection>
     
 
     fileprivate lazy var smartAlbumPlaceHolders = [SmartAlbumPlaceHolder(albumName: "Search", imageName: "magnifyingglass"),
@@ -214,3 +221,16 @@ extension AlbumVC: UITableViewDelegate, UITableViewDataSource {
 
 
 
+//MARK: - PHPhotoLibraryChangeObserver
+extension AlbumVC: PHPhotoLibraryChangeObserver  {
+    
+    func photoLibraryDidChange(_ changeInstance: PHChange) {
+        DispatchQueue.main.async {
+            if let changeDetails = changeInstance.changeDetails(for: self.userCreatedAlbums) {
+                self.userCreatedAlbums = changeDetails.fetchResultAfterChanges
+            }
+            self.tableView.reloadData()
+        }
+    }
+    
+}

@@ -18,7 +18,14 @@ class ViewController: UIViewController {
         setUpViews()
         setUpGestureRecognizers()
         fetchPhotos()
+        PHPhotoLibrary.shared().register(self)
+
     }
+    
+    deinit {
+        PHPhotoLibrary.shared().unregisterChangeObserver(self)
+    }
+    
 
     
     //MARK: - Properties
@@ -368,4 +375,16 @@ extension ViewController: UIViewControllerTransitioningDelegate {
 
 
 
-
+//MARK: - PHPhotoLibraryChangeObserver
+extension ViewController: PHPhotoLibraryChangeObserver  {
+    
+    func photoLibraryDidChange(_ changeInstance: PHChange) {
+        DispatchQueue.main.async {
+            if let changeDetails = changeInstance.changeDetails(for: self.allPhotosInCurrentAlbum) {
+                self.allPhotosInCurrentAlbum = changeDetails.fetchResultAfterChanges
+                self.mediaPickerView.bindDataFromPhotosLibrary(fetchedAssets: self.allPhotosInCurrentAlbum, albumTitle: self.mediaPickerView.getCurrentAlbumTitle())
+            }
+        }
+    }
+    
+}

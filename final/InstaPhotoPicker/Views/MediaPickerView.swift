@@ -99,11 +99,12 @@ class MediaPickerView: UIView {
     
     func bindDataFromPhotosLibrary(fetchedAssets: PHFetchResult<PHAsset>, albumTitle: String) {
         allPhotosInSelectedAlbum = fetchedAssets
-        let indexPath = IndexPath(item: 0, section: 0)
-        collectionView.scrollToItem(at: indexPath, at: .top, animated: false)
         collectionView.reloadData()
         albumTitleButton.setTitle(albumTitle, for: .normal)
         handleAnimateArrow(toIdentity: true)
+        guard allPhotosInSelectedAlbum.count != 0 else {return} // prevents indexPath crash
+        let indexPath = IndexPath(item: 0, section: 0)
+        collectionView.scrollToItem(at: indexPath, at: .top, animated: false)
     }
     
     /// Animates albumTitleButton arrow Imageview
@@ -117,6 +118,12 @@ class MediaPickerView: UIView {
         }
     }
     
+    
+    
+    func getCurrentAlbumTitle() -> String {
+        let albumTitle = albumTitleButton.titleLabel?.text ?? ""
+        return albumTitle
+    }
     
     
     //MARK: - Target Selectors
