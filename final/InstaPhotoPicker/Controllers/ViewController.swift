@@ -7,7 +7,7 @@
 
 import UIKit
 import Photos
-
+import PhotosUI
 class ViewController: UIViewController {
 
     
@@ -22,6 +22,13 @@ class ViewController: UIViewController {
 
     
     //MARK: - Properties
+    fileprivate var allPhotosInCurrentAlbum = PHFetchResult<PHAsset>()
+    fileprivate var smartAlbums = [PHAssetCollection]()
+    fileprivate var userCreatedAlbums = PHFetchResult<PHAssetCollection>()
+    
+    fileprivate let listOfsmartAlbumSubtypesToBeFetched: [PHAssetCollectionSubtype] = [.smartAlbumUserLibrary, .smartAlbumFavorites, .smartAlbumVideos, .smartAlbumScreenshots]
+
+    
     fileprivate let zoomNavigationDelegate = ZoomTransitionDelegate()
     fileprivate weak var selectedImageView: UIImageView?
     fileprivate var images = [UIImage]()
@@ -41,17 +48,25 @@ class ViewController: UIViewController {
     }()
     
     
+    fileprivate lazy var askPhotoPermissionView: AskPhotoPermissionView = {
+        let view = AskPhotoPermissionView()
+        view.delegate = self
+        return view
+    }()
     
     
     
     //MARK: - Methods
     fileprivate func setUpViews() {
         view.addSubview(mediaPickerView)
+        view.addSubview(askPhotoPermissionView)
         
         mediaPickerViewTopAnchor = mediaPickerView.topAnchor.constraint(equalTo: view.topAnchor, constant: collapsedModePadding)
         mediaPickerViewTopAnchor.isActive = true
         
         mediaPickerView.anchor(top: nil, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, size: .init(width: 0, height: view.frame.height))
+        
+        askPhotoPermissionView.anchor(top: nil, leading: view.leadingAnchor, bottom: mediaPickerView.topAnchor, trailing: view.trailingAnchor, size: .init(width: 0, height: view.frame.height))
 
     }
     
@@ -63,37 +78,124 @@ class ViewController: UIViewController {
     
     
     
-    
-    
-    
     //MARK: - Photokit
+    fileprivate func getPhotoPermission(completionHandler: @escaping(Bool) -> Void) {
+        
+        // 1 If already previously granted proceed to return true
+        guard PHPhotoLibrary.authorizationStatus() != .authorized else {
+            completionHandler(true)
+            return
+        }
+        
+        
+        PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
+            switch status {
+            case .notDetermined:
+                // The user hasn't determined this app's access.
+                print("notDetermined")
+                //                completionHandler(false)
+                
+            case .restricted:
+                // The system restricted this app's access.
+                print("restricted")
+                completionHandler(false)
+                
+            case .denied:
+                // The user explicitly denied this app's access.
+                print("denied")
+                completionHandler(false)
+                
+            case .authorized:
+                // The user authorized this app to access Photos data.
+                print("authorized")
+                completionHandler(true)
+                
+                
+            case .limited:
+                // The user authorized this app for limited Photos access.
+                print("limited")
+                completionHandler(true)
+                
+            @unknown default:
+                fatalError()
+            }
+        }
+    }
+    
+    
+    
+
+    
+    
     fileprivate func fetchPhotos() {
         
+        
+        // 1 If already previously granted proceed to fetchAssets
+        let authStatus = PHPhotoLibrary.authorizationStatus()
+        guard authStatus ==  .authorized || authStatus == .limited else {return}
+        DispatchQueue.main.async {
+            self.askPhotoPermissionView.updateTexts()
+        }
+
+        
+        
+        for collectionSubType in  listOfsmartAlbumSubtypesToBeFetched {
+            if let smartAlbum = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: collectionSubType, options: nil).firstObject {
+                smartAlbums.append(smartAlbum)
+            }
+        }
+        
+        
+        let userCreatedAlbumsOptions = PHFetchOptions()
+        userCreatedAlbumsOptions.predicate = NSPredicate(format: "estimatedAssetCount > 0")
+        userCreatedAlbums = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .albumRegular, options: userCreatedAlbumsOptions)
+
+        
+        
         let fetchOptions = PHFetchOptions()
-        fetchOptions.fetchLimit = 100
         let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
         fetchOptions.sortDescriptors = [sortDescriptor]
+        allPhotosInCurrentAlbum = PHAsset.fetchAssets(with: fetchOptions)
+        mediaPickerView.bindDataFromPhotosLibrary(fetchedAssets: allPhotosInCurrentAlbum, albumTitle: "Recents")
         
-        let allPhotos = PHAsset.fetchAssets(with: .image, options: fetchOptions)
         
-        allPhotos.enumerateObjects({ (asset, count, stop) in
-            let imageManager = PHImageManager.default()
-            let targetSize = CGSize(width: 350, height: 350)
-            let options = PHImageRequestOptions()
-            options.isSynchronous = true
-            imageManager.requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFit, options: options, resultHandler: { (image, info) in
-                
-                if let image = image {
-                    self.images.append(image)
-                }
-                
-                if count == allPhotos.count - 1 {
-                    self.mediaPickerView.bindData(images: self.images)
-                }
-                
-            })
-            
-        })
+//        let allPhotosOptions = PHFetchOptions()
+//        allPhotosOptions.sortDescriptors = [
+//          NSSortDescriptor(
+//            key: "creationDate",
+//            ascending: false)
+//        ]
+//
+//        let fetchOptions = PHFetchOptions()
+//        fetchOptions.fetchLimit = 100
+//        let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
+//        fetchOptions.sortDescriptors = [sortDescriptor]
+//
+//        let allPhotos = PHAsset.fetchAssets(with: .image, options: fetchOptions)
+//
+//        allPhotos.enumerateObjects({ (asset, count, stop) in
+//            let imageManager = PHImageManager.default()
+//            let targetSize = CGSize(width: 350, height: 350)
+//            let options = PHImageRequestOptions()
+//            options.isSynchronous = true
+//            imageManager.requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFit, options: options, resultHandler: { (image, info) in
+//
+//                if let image = image {
+//                    self.images.append(image)
+//                }
+//
+//                if count == allPhotos.count - 1 {
+//                    DispatchQueue.main.async {
+//                        self.mediaPickerView.bindData(images: self.images)
+//                    }
+//                }
+//
+//            })
+//
+//        })
+//
+        
+        
     }
     
     
@@ -145,14 +247,29 @@ class ViewController: UIViewController {
 
 
 
-
-//MARK: - MediaPickerViewDelegate
-extension ViewController: MediaPickerViewDelegate {
+//MARK: - AskPhotoPermissionViewDelegate
+extension ViewController: AskPhotoPermissionViewDelegate {
     
+    func handleAskForPhotoPermission() {
+        // On button tap, we ask for auth to access photos library and if granted we fetchPhotos
+        getPhotoPermission { [weak self] granted  in
+            if granted {
+                self?.fetchPhotos()
+            }
+        }
+    }
+}
+
+
+//MARK: - MediaPickerViewDelegate & AlbumVCDelegate & PHPickerViewControllerDelegate
+extension ViewController: MediaPickerViewDelegate, AlbumVCDelegate, PHPickerViewControllerDelegate {
+    
+    //MARK: - MediaPickerViewDelegate
     func handleOpenAlbumVC() {
-        let albumVC = AlbumVC()
+        let albumVC = AlbumVC(smartAlbums: smartAlbums, userCreatedAlbums: userCreatedAlbums)
        albumVC.modalPresentationStyle = .custom
        albumVC.transitioningDelegate = self
+       albumVC.delegate = self
        present(albumVC, animated: true, completion: nil)
     }
     
@@ -164,10 +281,52 @@ extension ViewController: MediaPickerViewDelegate {
     }
     
     
-    
     func handleBeyondTutScope() {
         UIAlertController.show("Beyond the scope of this tutorial", from: self)
     }
+    
+    
+    
+    //MARK: - AlbumVCDelegate
+    func handleDidSelect(smartAlbum: PHAssetCollection) {
+        let fetchOptions = PHFetchOptions()
+        let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
+        fetchOptions.sortDescriptors = [sortDescriptor]
+        let fetchedAssets = PHAsset.fetchAssets(in: smartAlbum, options: fetchOptions)
+        allPhotosInCurrentAlbum = fetchedAssets
+        mediaPickerView.bindDataFromPhotosLibrary(fetchedAssets: allPhotosInCurrentAlbum, albumTitle: smartAlbum.localizedTitle ?? "")
+    }
+    
+    
+    func handleOnDismiss() {
+        mediaPickerView.handleAnimateArrow(toIdentity: true)
+    }
+    
+    
+    func handlePresentPHPickerViewController() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            var configuration = PHPickerConfiguration(photoLibrary: PHPhotoLibrary.shared())
+            configuration.selectionLimit = 10
+            let picker = PHPickerViewController(configuration: configuration)
+            picker.delegate = self
+            self.present(picker, animated: true, completion: nil)
+        }
+    }
+    
+    
+    
+    //MARK: - PHPickerViewControllerDelegate
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        dismiss(animated: true)
+        let identifiers = results.compactMap(\.assetIdentifier)
+        let fetchResult = PHAsset.fetchAssets(withLocalIdentifiers: identifiers, options: nil)
+        print(fetchResult.count)
+        DispatchQueue.main.async {
+            self.mediaPickerView.bindDataFromPhotosLibrary(fetchedAssets: fetchResult, albumTitle: "Search Result")
+        }
+    }
+    
+    
 }
 
 
@@ -207,26 +366,6 @@ extension ViewController: UIViewControllerTransitioningDelegate {
 
 
 
-
-#if canImport(SwiftUI) && DEBUG
-import SwiftUI
-
-let deviceNames: [String] = [
-    "iPhone SE (3rd generation)"
-]
-
-@available(iOS 13.0, *)
-struct ViewController_Preview: PreviewProvider {
-    static var previews: some View {
-        ForEach(deviceNames, id: \.self) { deviceName in
-            UIViewControllerPreview {
-                ViewController()
-            }.previewDevice(PreviewDevice(rawValue: deviceName))
-                .previewDisplayName(deviceName)
-        }
-    }
-}
-#endif
 
 
 

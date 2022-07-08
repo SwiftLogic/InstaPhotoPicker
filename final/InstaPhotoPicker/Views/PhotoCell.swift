@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Photos
 class PhotoCell: UICollectionViewCell {
     
     //MARK: - Init
@@ -23,7 +24,7 @@ class PhotoCell: UICollectionViewCell {
     
     static let cellReuseIdentifier = String(describing: PhotoCell.self)
     
-    fileprivate let thumbnailImageView: UIImageView = {
+     fileprivate(set) lazy var thumbnailImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
@@ -38,15 +39,12 @@ class PhotoCell: UICollectionViewCell {
         thumbnailImageView.fillSuperview()
     }
     
+   
     
-    func getImageView() -> UIImageView {
-        return thumbnailImageView
-    }
-    
-    
-    func bindData(image: UIImage) {
-        thumbnailImageView.image = image
-        getDominantColor(from: image)
+    func bind(asset: PHAsset) {
+        let assetImage = getAssetThumbnail(asset: asset, size: bounds.size)
+        thumbnailImageView.image = assetImage
+        getDominantColor(from: assetImage ?? UIImage())
     }
     
     
@@ -58,9 +56,8 @@ class PhotoCell: UICollectionViewCell {
         } catch let error {
             print("failed to set background color ", error.localizedDescription)
         }
-    }
-    
-    
+    }    
+
 }
 
 

@@ -10,6 +10,15 @@ import UIKit
 
 extension UIView {
     
+    
+    /// Flip view 180, true to rotate 180, false to return to identity
+    func handleRotate180(rotate: Bool, withDuration: CGFloat = 0.5) {
+        UIView.animate(withDuration: withDuration) { () -> Void in
+            self.transform = rotate == true ? CGAffineTransform(rotationAngle: CGFloat.pi) : .identity
+        }
+        
+    }
+    
     @discardableResult
     func anchor(top: NSLayoutYAxisAnchor?, leading: NSLayoutXAxisAnchor?, bottom: NSLayoutYAxisAnchor?, trailing: NSLayoutXAxisAnchor?, padding: UIEdgeInsets = .zero, size: CGSize = .zero) -> AnchoredConstraints {
         
@@ -196,6 +205,8 @@ import CoreImage
 
 
 extension UIImage {
+    
+    
     
     enum ImageColorError: Error {
         /// The `CIImage` instance could not be created.
