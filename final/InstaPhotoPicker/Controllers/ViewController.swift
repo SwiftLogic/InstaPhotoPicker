@@ -166,43 +166,6 @@ class ViewController: UIViewController {
         mediaPickerView.bindDataFromPhotosLibrary(fetchedAssets: allPhotosInCurrentAlbum, albumTitle: "Recents")
         
         
-//        let allPhotosOptions = PHFetchOptions()
-//        allPhotosOptions.sortDescriptors = [
-//          NSSortDescriptor(
-//            key: "creationDate",
-//            ascending: false)
-//        ]
-//
-//        let fetchOptions = PHFetchOptions()
-//        fetchOptions.fetchLimit = 100
-//        let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
-//        fetchOptions.sortDescriptors = [sortDescriptor]
-//
-//        let allPhotos = PHAsset.fetchAssets(with: .image, options: fetchOptions)
-//
-//        allPhotos.enumerateObjects({ (asset, count, stop) in
-//            let imageManager = PHImageManager.default()
-//            let targetSize = CGSize(width: 350, height: 350)
-//            let options = PHImageRequestOptions()
-//            options.isSynchronous = true
-//            imageManager.requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFit, options: options, resultHandler: { (image, info) in
-//
-//                if let image = image {
-//                    self.images.append(image)
-//                }
-//
-//                if count == allPhotos.count - 1 {
-//                    DispatchQueue.main.async {
-//                        self.mediaPickerView.bindData(images: self.images)
-//                    }
-//                }
-//
-//            })
-//
-//        })
-//
-        
-        
     }
     
     
