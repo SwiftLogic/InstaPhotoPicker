@@ -17,6 +17,8 @@ class ViewController: UIViewController {
         view.backgroundColor = .black
         setUpViews()
         setUpGestureRecognizers()
+        fetchPhotoLibraryAssets()
+
     }
     
    
@@ -76,6 +78,19 @@ class ViewController: UIViewController {
     
     //MARK: - Photokit
    
+    fileprivate func getPhotoPermission(completionHandler: @escaping(Bool) -> Void) {
+        completionHandler(true)
+    }
+    
+    
+    
+
+    
+    
+    fileprivate func fetchPhotoLibraryAssets() {
+        
+        
+    }
     
 
     
@@ -137,9 +152,14 @@ class ViewController: UIViewController {
 extension ViewController: AskPhotoPermissionViewDelegate {
     
     func handleAskForPhotoPermission() {
-        
-        
+        // On button tap, we ask for auth to access photos library and if granted we fetchPhotos
+        getPhotoPermission { [weak self] granted  in
+            if granted {
+                self?.fetchPhotoLibraryAssets()
+            }
+        }
     }
+        
 }
 
 

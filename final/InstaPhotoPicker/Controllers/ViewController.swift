@@ -17,7 +17,7 @@ class ViewController: UIViewController {
         view.backgroundColor = .black
         setUpViews()
         setUpGestureRecognizers()
-        fetchPhotos()
+        fetchPhotoLibraryAssets()
         PHPhotoLibrary.shared().register(self)
 
     }
@@ -134,12 +134,13 @@ class ViewController: UIViewController {
 
     
     
-    fileprivate func fetchPhotos() {
+    fileprivate func fetchPhotoLibraryAssets() {
         
         
         // 1 If already previously granted proceed to fetchAssets
         let authStatus = PHPhotoLibrary.authorizationStatus()
         guard authStatus ==  .authorized || authStatus == .limited else {return}
+        
         DispatchQueue.main.async {
             self.askPhotoPermissionView.updateTexts()
         }
@@ -224,7 +225,7 @@ extension ViewController: AskPhotoPermissionViewDelegate {
         // On button tap, we ask for auth to access photos library and if granted we fetchPhotos
         getPhotoPermission { [weak self] granted  in
             if granted {
-                self?.fetchPhotos()
+                self?.fetchPhotoLibraryAssets()
             }
         }
     }
