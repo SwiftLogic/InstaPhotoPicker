@@ -13,7 +13,8 @@ class AlbumVC: CardModalViewController {
     
     
     //MARK: - Init
-    init(smartAlbums: [PHAssetCollection], userCreatedAlbums: PHFetchResult<PHAssetCollection>) {
+    init(smartAlbums: [PHAssetCollection] = [],
+         userCreatedAlbums: PHFetchResult<PHAssetCollection> = PHFetchResult<PHAssetCollection>()) {
         self.smartAlbums = smartAlbums
         self.userCreatedAlbums = userCreatedAlbums
         super.init(nibName: nil, bundle: nil)
@@ -33,8 +34,13 @@ class AlbumVC: CardModalViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpTableView()
-        PHPhotoLibrary.shared().register(self)
         view.backgroundColor = .clear
+        
+        let authStatus = PHPhotoLibrary.authorizationStatus()
+        if authStatus ==  .authorized || authStatus == .limited {
+            PHPhotoLibrary.shared().register(self)
+        }
+        
     }
     
     

@@ -18,9 +18,9 @@ class ViewController: UIViewController {
         setUpViews()
         setUpGestureRecognizers()
         fetchPhotoLibraryAssets()
-        PHPhotoLibrary.shared().register(self)
-
     }
+    
+    
     
     deinit {
         PHPhotoLibrary.shared().unregisterChangeObserver(self)
@@ -137,10 +137,11 @@ class ViewController: UIViewController {
     fileprivate func fetchPhotoLibraryAssets() {
         
         
-        // 1 If already previously granted proceed to fetchAssets
         let authStatus = PHPhotoLibrary.authorizationStatus()
         guard authStatus ==  .authorized || authStatus == .limited else {return}
         
+        PHPhotoLibrary.shared().register(self)
+
         DispatchQueue.main.async {
             self.askPhotoPermissionView.updateTexts()
         }
@@ -164,9 +165,9 @@ class ViewController: UIViewController {
         let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
         fetchOptions.sortDescriptors = [sortDescriptor]
         allPhotosInCurrentAlbum = PHAsset.fetchAssets(with: fetchOptions)
-        mediaPickerView.bindDataFromPhotosLibrary(fetchedAssets: allPhotosInCurrentAlbum, albumTitle: "Recents")
-        
-        
+        DispatchQueue.main.async {
+            self.mediaPickerView.bindDataFromPhotosLibrary(fetchedAssets: self.allPhotosInCurrentAlbum, albumTitle: "Recents")
+        }
     }
     
     

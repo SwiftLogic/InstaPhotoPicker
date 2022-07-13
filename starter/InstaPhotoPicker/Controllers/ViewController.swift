@@ -18,10 +18,12 @@ class ViewController: UIViewController {
         setUpViews()
         setUpGestureRecognizers()
         fetchPhotoLibraryAssets()
-
     }
     
    
+    deinit {
+        
+    }
     
 
     
@@ -159,8 +161,9 @@ extension ViewController: AskPhotoPermissionViewDelegate {
             }
         }
     }
-        
 }
+
+
 
 
 //MARK: - MediaPickerViewDelegate & AlbumVCDelegate & PHPickerViewControllerDelegate
@@ -168,7 +171,7 @@ extension ViewController: MediaPickerViewDelegate, AlbumVCDelegate, PHPickerView
     
     //MARK: - MediaPickerViewDelegate
     func handleOpenAlbumVC() {
-        let albumVC = AlbumVC(smartAlbums: [], userCreatedAlbums: PHFetchResult<PHAssetCollection>())
+        let albumVC = AlbumVC()
        albumVC.modalPresentationStyle = .custom
        albumVC.transitioningDelegate = self
        albumVC.delegate = self

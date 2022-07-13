@@ -13,7 +13,8 @@ class AlbumVC: CardModalViewController {
     
     
     //MARK: - Init
-    init(smartAlbums: [PHAssetCollection], userCreatedAlbums: PHFetchResult<PHAssetCollection>) {
+    init(smartAlbums: [PHAssetCollection] = [],
+         userCreatedAlbums: PHFetchResult<PHAssetCollection> = PHFetchResult<PHAssetCollection>()) {
         self.smartAlbums = smartAlbums
         self.userCreatedAlbums = userCreatedAlbums
         super.init(nibName: nil, bundle: nil)
