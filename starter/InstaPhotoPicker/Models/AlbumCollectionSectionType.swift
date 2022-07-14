@@ -7,10 +7,9 @@
 
 import UIKit
 enum AlbumCollectionSectionType: Int, CustomStringConvertible {
-    case /*all,*/ smartAlbums, userCreatedAlbums
+    case  smartAlbums, userCreatedAlbums
     var description: String {
         switch self {
-//        case .all: return "All Photos"
         case .smartAlbums: return "Smart Albums"
         case .userCreatedAlbums: return "User Created Albums"
         }

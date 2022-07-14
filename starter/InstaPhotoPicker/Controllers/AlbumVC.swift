@@ -89,70 +89,9 @@ class AlbumVC: CardModalViewController {
 extension AlbumVC: UITableViewDelegate, UITableViewDataSource {
     
     
-    fileprivate func dequeSmartAlbumCell(for indexPath: IndexPath) -> UITableViewCell {
-        // cell dequeing
-         let smartAlbumCell = tableView.dequeueReusableCell(withIdentifier: smartAlbumCellIdentifier, for: indexPath)
-         smartAlbumCell.backgroundColor = .clear
-         smartAlbumCell.selectionStyle = .none
-        
-        // configuring SmartAlbumCell's UI and data binding
-        let album = smartAlbumPlaceHolders[indexPath.row]
-        var contentConfig = smartAlbumCell.defaultContentConfiguration()
-        contentConfig.text = album.albumName
-        
-        let config = UIImage.SymbolConfiguration(pointSize: 15, weight: .semibold, scale: .large)
-        let image = UIImage(systemName: album.imageName, withConfiguration:
-                                config)?.withRenderingMode(.alwaysTemplate)
-
-        contentConfig.image = image
-        contentConfig.imageProperties.tintColor = .white
-        contentConfig.textProperties.color = .white
-        contentConfig.imageToTextPadding = 12
-        smartAlbumCell.contentConfiguration = contentConfig
-        
-         return smartAlbumCell
-     }
-     
-     
-     
-     fileprivate func dequeUserCreatedAlbumCell(for indexPath: IndexPath) -> AlbumCell {
-         
-         // cell dequeing
-         let userCreatedAlbumCell = tableView.dequeueReusableCell(withIdentifier: userCreatedAlbumCellIdentifier, for: indexPath) as! AlbumCell
-         userCreatedAlbumCell.backgroundColor = .clear
-         userCreatedAlbumCell.selectionStyle = .none
-         
-         // cell data binding
-         var coverAsset: PHAsset?
-         let collection = userCreatedAlbums[indexPath.item]
-         let fetchOptions = PHFetchOptions()
-         fetchOptions.fetchLimit = 1
-         let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
-         fetchOptions.sortDescriptors = [sortDescriptor]
-         
-         let fetchedAssets = PHAsset.fetchAssets(in: collection, options: fetchOptions)
-         coverAsset = fetchedAssets.firstObject
-         guard let asset = coverAsset else { return userCreatedAlbumCell }
-         
-         let coverImage = getAssetThumbnail(asset: asset, size: userCreatedAlbumCell.bounds.size)
-         userCreatedAlbumCell.bindData(albumTitle: collection.localizedTitle ?? "", albumCoverImage: coverImage)
-         
-         return userCreatedAlbumCell
-     }
-     
-     
-
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let sectionType = albumSections[indexPath.section]
-        switch sectionType {
-        case .smartAlbums:
-            let smartAlbumCell = dequeSmartAlbumCell(for: indexPath)
-            return smartAlbumCell
-        case  .userCreatedAlbums:
-            let userCreatedAlbumCell = dequeUserCreatedAlbumCell(for: indexPath)
-            return userCreatedAlbumCell
-        }
+       return UITableViewCell()
     }
     
     
@@ -168,10 +107,7 @@ extension AlbumVC: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch albumSections[section] {
-        case .smartAlbums: return smartAlbumPlaceHolders.count
-        case .userCreatedAlbums: return userCreatedAlbums.count
-        }
+        return 1
     }
     
     
