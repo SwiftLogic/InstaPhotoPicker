@@ -60,11 +60,11 @@ class AlbumVC: CardModalViewController {
     fileprivate var userCreatedAlbums: PHFetchResult<PHAssetCollection>
     
 
-    fileprivate lazy var smartAlbumPlaceHolders = [SmartAlbumPlaceHolder(albumName: "Search", imageName: "magnifyingglass"),
-                                                   SmartAlbumPlaceHolder(albumName: "Recents", imageName: "clock", collection: smartAlbums[0]),
-                                                   SmartAlbumPlaceHolder(albumName: "Favorites", imageName: "heart", collection: smartAlbums[1]),
-                                                   SmartAlbumPlaceHolder(albumName: "Videos", imageName: "play.circle", collection: smartAlbums[2]),
-                                                   SmartAlbumPlaceHolder(albumName: "Screenshots", imageName: "iphone", collection: smartAlbums[3])
+    fileprivate lazy var smartAlbumSection = [SmartAlbumItem(albumName: "Search", imageName: "magnifyingglass"),
+                                                   SmartAlbumItem(albumName: "Recents", imageName: "clock", collection: smartAlbums[0]),
+                                                   SmartAlbumItem(albumName: "Favorites", imageName: "heart", collection: smartAlbums[1]),
+                                                   SmartAlbumItem(albumName: "Videos", imageName: "play.circle", collection: smartAlbums[2]),
+                                                   SmartAlbumItem(albumName: "Screenshots", imageName: "iphone", collection: smartAlbums[3])
     ]
     
     
@@ -106,7 +106,7 @@ extension AlbumVC: UITableViewDelegate, UITableViewDataSource {
          smartAlbumCell.selectionStyle = .none
         
         // configuring SmartAlbumCell's UI and data binding
-        let album = smartAlbumPlaceHolders[indexPath.row]
+        let album = smartAlbumSection[indexPath.row]
         var contentConfig = smartAlbumCell.defaultContentConfiguration()
         contentConfig.text = album.albumName
         
@@ -170,7 +170,7 @@ extension AlbumVC: UITableViewDelegate, UITableViewDataSource {
         switch albumSections[indexPath.section] {
         case .smartAlbums:
             
-            if let smartAlbum = smartAlbumPlaceHolders[indexPath.row].collection {
+            if let smartAlbum = smartAlbumSection[indexPath.row].collection {
                 delegate?.handleDidSelect(smartAlbum: smartAlbum)
             } else {
                 delegate?.handlePresentPHPickerViewController()
@@ -193,7 +193,7 @@ extension AlbumVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch albumSections[section] {
-        case .smartAlbums: return smartAlbumPlaceHolders.count
+        case .smartAlbums: return smartAlbumSection.count
         case .userCreatedAlbums: return userCreatedAlbums.count
         }
     }

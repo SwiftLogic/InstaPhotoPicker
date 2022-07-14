@@ -50,12 +50,6 @@ class AlbumVC: CardModalViewController {
     fileprivate var userCreatedAlbums: PHFetchResult<PHAssetCollection>
     
 
-    fileprivate lazy var smartAlbumPlaceHolders = [SmartAlbumPlaceHolder(albumName: "Search", imageName: "magnifyingglass"),
-                                                   SmartAlbumPlaceHolder(albumName: "Recents", imageName: "clock"),
-                                                   SmartAlbumPlaceHolder(albumName: "Favorites", imageName: "heart"),
-                                                   SmartAlbumPlaceHolder(albumName: "Videos", imageName: "play.circle"),
-                                                   SmartAlbumPlaceHolder(albumName: "Screenshots", imageName: "iphone")
-    ]
     
     
     fileprivate lazy var tableView: UITableView = {
