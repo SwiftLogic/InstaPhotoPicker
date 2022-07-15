@@ -26,7 +26,7 @@
 		E9C300EA2874C1D200B261A0 /* AlbumCollectionSectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C300E92874C1D200B261A0 /* AlbumCollectionSectionType.swift */; };
 		E9C300EC2874C4E900B261A0 /* AskPhotoPermissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C300EB2874C4E900B261A0 /* AskPhotoPermissionView.swift */; };
 		E9C300EF28753DBF00B261A0 /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C300EE28753DBF00B261A0 /* AlbumCell.swift */; };
-		E9C300F12877645E00B261A0 /* SmartAlbumPlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C300F02877645E00B261A0 /* SmartAlbumPlaceHolder.swift */; };
+		E9C300F12877645E00B261A0 /* SmartAlbumItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C300F02877645E00B261A0 /* SmartAlbumItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,7 +51,7 @@
 		E9C300E92874C1D200B261A0 /* AlbumCollectionSectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCollectionSectionType.swift; sourceTree = "<group>"; };
 		E9C300EB2874C4E900B261A0 /* AskPhotoPermissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskPhotoPermissionView.swift; sourceTree = "<group>"; };
 		E9C300EE28753DBF00B261A0 /* AlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCell.swift; sourceTree = "<group>"; };
-		E9C300F02877645E00B261A0 /* SmartAlbumPlaceHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartAlbumPlaceHolder.swift; sourceTree = "<group>"; };
+		E9C300F02877645E00B261A0 /* SmartAlbumItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartAlbumItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,7 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				E9C300E92874C1D200B261A0 /* AlbumCollectionSectionType.swift */,
-				E9C300F02877645E00B261A0 /* SmartAlbumPlaceHolder.swift */,
+				E9C300F02877645E00B261A0 /* SmartAlbumItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -248,7 +248,7 @@
 				E960C0B9286E02A300F5CA6A /* CardModalViewController.swift in Sources */,
 				E938686E286BD871005287FE /* PhotoCell.swift in Sources */,
 				E938686A286BB696005287FE /* Utils.swift in Sources */,
-				E9C300F12877645E00B261A0 /* SmartAlbumPlaceHolder.swift in Sources */,
+				E9C300F12877645E00B261A0 /* SmartAlbumItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
