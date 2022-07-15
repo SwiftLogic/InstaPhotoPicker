@@ -134,18 +134,18 @@ extension AlbumVC: UITableViewDelegate, UITableViewDataSource {
          
          // cell data binding
          var coverAsset: PHAsset?
-         let collection = userCreatedAlbums[indexPath.item]
+         let aUserCreatedAlbum = userCreatedAlbums[indexPath.item]
          let fetchOptions = PHFetchOptions()
          fetchOptions.fetchLimit = 1
          let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
          fetchOptions.sortDescriptors = [sortDescriptor]
          
-         let fetchedAssets = PHAsset.fetchAssets(in: collection, options: fetchOptions)
+         let fetchedAssets = PHAsset.fetchAssets(in: aUserCreatedAlbum, options: fetchOptions)
          coverAsset = fetchedAssets.firstObject
          guard let asset = coverAsset else { return userCreatedAlbumCell }
          
          let coverImage = getAssetThumbnail(asset: asset, size: userCreatedAlbumCell.bounds.size)
-         userCreatedAlbumCell.bindData(albumTitle: collection.localizedTitle ?? "", albumCoverImage: coverImage)
+         userCreatedAlbumCell.bindData(albumTitle: aUserCreatedAlbum.localizedTitle ?? "", albumCoverImage: coverImage)
          
          return userCreatedAlbumCell
      }
@@ -171,7 +171,7 @@ extension AlbumVC: UITableViewDelegate, UITableViewDataSource {
         case .smartAlbums:
             
             if let smartAlbum = smartAlbumSection[indexPath.row].collection {
-                delegate?.handleDidSelect(smartAlbum: smartAlbum)
+                delegate?.handleDidSelect(album: smartAlbum)
             } else {
                 delegate?.handlePresentPHPickerViewController()
             }
@@ -179,7 +179,7 @@ extension AlbumVC: UITableViewDelegate, UITableViewDataSource {
             dismiss(animated: true)
             
         case .userCreatedAlbums:
-            delegate?.handleDidSelect(smartAlbum: userCreatedAlbums[indexPath.row])
+            delegate?.handleDidSelect(album: userCreatedAlbums[indexPath.row])
             dismiss(animated: true)
         }
     }

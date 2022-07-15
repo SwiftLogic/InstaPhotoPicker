@@ -25,7 +25,7 @@ protocol AskPhotoPermissionViewDelegate: AnyObject {
 
 //MARK: - AlbumVCDelegate
 protocol AlbumVCDelegate: AnyObject {
-    func handleDidSelect(smartAlbum: PHAssetCollection)
+    func handleDidSelect(album: PHAssetCollection)
     func handlePresentPHPickerViewController()
     func handleOnDismiss()
 }

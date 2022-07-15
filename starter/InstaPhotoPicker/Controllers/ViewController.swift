@@ -81,6 +81,7 @@ class ViewController: UIViewController {
     //MARK: - Photokit
    
     fileprivate func getPhotoPermission(completionHandler: @escaping(Bool) -> Void) {
+        // REPLACE CODE IN HERE
         completionHandler(true)
     }
     
@@ -91,7 +92,8 @@ class ViewController: UIViewController {
     
     fileprivate func fetchPhotoLibraryAssets() {
         
-        
+        // ADD CODE IN HERE
+
     }
     
 
@@ -114,9 +116,9 @@ class ViewController: UIViewController {
             let translatedYPoint = translation.y
             
             if mediaPickerViewTopAnchor.constant < 0 {
-                mediaPickerViewTopAnchor.constant = 0
+                mediaPickerViewTopAnchor.constant = 0 // Prevents user from dragging mediaPickerView past 0
             } else {
-                mediaPickerViewTopAnchor.constant += translatedYPoint
+                mediaPickerViewTopAnchor.constant += translatedYPoint // Allows user to drag
             }
             
             gesture.setTranslation(.zero, in: view)
@@ -171,6 +173,7 @@ extension ViewController: MediaPickerViewDelegate, AlbumVCDelegate, PHPickerView
     
     //MARK: - MediaPickerViewDelegate
     func handleOpenAlbumVC() {
+        // REPLACE CODE IN HERE
         let albumVC = AlbumVC()
        albumVC.modalPresentationStyle = .custom
        albumVC.transitioningDelegate = self
@@ -193,8 +196,8 @@ extension ViewController: MediaPickerViewDelegate, AlbumVCDelegate, PHPickerView
     
     
     //MARK: - AlbumVCDelegate
-    func handleDidSelect(smartAlbum: PHAssetCollection) {
-        
+    func handleDidSelect(album: PHAssetCollection) {
+        // ADD CODE IN HERE
     }
     
     
@@ -204,25 +207,14 @@ extension ViewController: MediaPickerViewDelegate, AlbumVCDelegate, PHPickerView
     
     
     func handlePresentPHPickerViewController() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            var configuration = PHPickerConfiguration(photoLibrary: PHPhotoLibrary.shared())
-            configuration.selectionLimit = 10
-            let picker = PHPickerViewController(configuration: configuration)
-            picker.delegate = self
-            self.present(picker, animated: true, completion: nil)
-        }
+        // ADD CODE IN HERE
     }
     
     
     
     //MARK: - PHPickerViewControllerDelegate
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        dismiss(animated: true)
-        let identifiers = results.compactMap(\.assetIdentifier)
-        let fetchResult = PHAsset.fetchAssets(withLocalIdentifiers: identifiers, options: nil)
-        DispatchQueue.main.async {
-            self.mediaPickerView.bindDataFromPhotosLibrary(fetchedAssets: fetchResult, albumTitle: "Search Result")
-        }
+        // ADD CODE IN HERE
     }
     
     

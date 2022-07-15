@@ -260,13 +260,13 @@ extension ViewController: MediaPickerViewDelegate, AlbumVCDelegate, PHPickerView
     
     
     //MARK: - AlbumVCDelegate
-    func handleDidSelect(smartAlbum: PHAssetCollection) {
+    func handleDidSelect(album: PHAssetCollection) {
         let fetchOptions = PHFetchOptions()
         let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
         fetchOptions.sortDescriptors = [sortDescriptor]
-        let fetchedAssets = PHAsset.fetchAssets(in: smartAlbum, options: fetchOptions)
+        let fetchedAssets = PHAsset.fetchAssets(in: album, options: fetchOptions)
         allPhotosInCurrentAlbum = fetchedAssets
-        mediaPickerView.bindDataFromPhotosLibrary(fetchedAssets: allPhotosInCurrentAlbum, albumTitle: smartAlbum.localizedTitle ?? "")
+        mediaPickerView.bindDataFromPhotosLibrary(fetchedAssets: allPhotosInCurrentAlbum, albumTitle: album.localizedTitle ?? "")
     }
     
     

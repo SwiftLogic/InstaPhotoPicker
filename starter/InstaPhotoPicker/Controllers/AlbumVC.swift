@@ -82,26 +82,38 @@ class AlbumVC: CardModalViewController {
 //MARK: - TableView Protocols
 extension AlbumVC: UITableViewDelegate, UITableViewDataSource {
     
-    
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       return UITableViewCell()
+    // REPLACE THIS
+    fileprivate func dequeSmartAlbumCell(for indexPath: IndexPath) -> UITableViewCell {
+        
+        return UITableViewCell()
     }
     
+    // REPLACE THIS
+    fileprivate func dequeUserCreatedAlbumCell(for indexPath: IndexPath) -> AlbumCell {
+        
+        return AlbumCell()
+    }
     
+    // REPLACE THIS
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
+    
+    // REPLACE THIS
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    // REPLACE THIS
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         dismiss(animated: true)
     }
     
     
+    
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return albumSections.count
-    }
-    
-    
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
     }
     
     
@@ -113,7 +125,6 @@ extension AlbumVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let blurEffect = UIBlurEffect(style: .dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        // Gets the header view as a UITableViewHeaderFooterView and changes the text colour and adds above blur effect
         let headerView: UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
         headerView.textLabel!.textColor = UIColor.white
         headerView.textLabel!.font = UIFont.systemFont(ofSize: 16, weight: .bold)
