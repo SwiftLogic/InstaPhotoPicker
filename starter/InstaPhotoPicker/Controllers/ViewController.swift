@@ -28,6 +28,7 @@ class ViewController: UIViewController {
 
     
     //MARK: - Properties
+    // ADD PROPERTIES CODE HERE
    
     
     fileprivate let zoomNavigationDelegate = ZoomTransitionDelegate()
@@ -172,8 +173,9 @@ extension ViewController: AskPhotoPermissionViewDelegate {
 extension ViewController: MediaPickerViewDelegate, AlbumVCDelegate, PHPickerViewControllerDelegate {
     
     //MARK: - MediaPickerViewDelegate
+    
     func handleOpenAlbumVC() {
-        // REPLACE CODE IN HERE
+        // REPLACE THE CODE IN THIS METHOD
         let albumVC = AlbumVC()
        albumVC.modalPresentationStyle = .custom
        albumVC.transitioningDelegate = self

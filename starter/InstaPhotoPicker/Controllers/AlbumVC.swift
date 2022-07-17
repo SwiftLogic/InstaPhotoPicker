@@ -50,6 +50,7 @@ class AlbumVC: CardModalViewController {
     fileprivate var userCreatedAlbums: PHFetchResult<PHAssetCollection>
     
 
+    // ADD THE smartAlbumSection CODE HERE
     
     
     fileprivate lazy var tableView: UITableView = {
