@@ -38,7 +38,6 @@ class ViewController: UIViewController {
     
     fileprivate let zoomNavigationDelegate = ZoomTransitionDelegate()
     fileprivate weak var selectedImageView: UIImageView?
-    fileprivate var images = [UIImage]()
 
 
     override var prefersStatusBarHidden: Bool {
