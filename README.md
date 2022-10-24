@@ -2,7 +2,7 @@
 
 An iOS Custom Media Picker Just like Instagram Stories.
 
-Source code for my [Tutorial](https://samisays11.github.io/posts/How-to-build-Instagram-PhotoPicker/) on how to build custom media picker using apple's PhotoKit framework.
+Source code for my [Tutorial](https://swiftlogic.github.io/posts/How-to-build-Instagram-PhotoPicker/) on how to build custom media picker using apple's PhotoKit framework.
 
 Core Focus: **PhotoKit**
 
