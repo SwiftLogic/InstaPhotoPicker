@@ -8,9 +8,9 @@ Core Focus: **PhotoKit**
 
 ## Demo: 
 
-![](https://samisays11.github.io/assets/img/demo.gif)
+![](https://swiftlogic.github.io/assets/img/demo.gif)
 
-Check out the [Tutorial](https://samisays11.github.io/posts/How-to-build-Instagram-PhotoPicker/) and learn: 
+Check out the [Tutorial](https://swiftlogic.github.io/posts/How-to-build-Instagram-PhotoPicker/) and learn: 
 
 - [x] How to Setup and Ask for User's Photo Library Permission.
 - [x] How to Fetch Smart Albums and User-Created Albums.
